@@ -1,0 +1,26 @@
+
+
+<div class="create-post">
+    <h2>Create a Post</h2>
+    <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Please enter Post title" [(ngModel)]="post.title" required minlength="5" maxlength="50">
+        <div *ngIf="postForm.controls['title'] && postForm.controls['title'].invalid && (postForm.controls['title'].dirty || postForm.controls['title'].touched)">
+          <div class="error" *ngIf="postForm.controls['title'] && postForm.controls['title'].errors && postForm.controls['title'].errors['required']">Title is required</div>
+          <div class="error" *ngIf="postForm.controls['title']?.errors && postForm.controls['title'].errors && postForm.controls['title'].errors['minlength']">Title must be at least 5 characters long</div>
+          <div class="error" *ngIf="postForm.controls['title']?.errors && postForm.controls['title'].errors && postForm.controls['title'].errors['maxlength']">Title cannot be more than 50 characters long</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="body">Description</label>
+        <textarea id="body" name="body" placeholder="Please enter Post description" [(ngModel)]="post.body" required minlength="10"></textarea>
+        <div class="error" *ngIf="postForm.controls['body'] && postForm.controls['body'].invalid && (postForm.controls['body'].dirty || postForm.controls['body'].touched)">
+          <div class="error" *ngIf="postForm.controls['body'].errors && postForm.controls['body'].errors['required']">Body is required</div>
+          <div class="error" *ngIf="postForm.controls['body'].errors && postForm.controls['body'].errors['minlength']">Body must be at least 10 characters long</div>
+        </div>
+      </div>
+      <button type="submit">Create Post</button>
+    </form>
+  </div>
+ 
